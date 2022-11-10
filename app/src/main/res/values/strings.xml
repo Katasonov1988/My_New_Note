@@ -2,4 +2,12 @@
     <string name="app_name">My New Note</string>
     <string name="add_new_note">add new note</string>
     <string name="notes_don_not_exist_add_note">У вас нет заметок.\nНажмите + чтобы добавить</string>
+    <string name="save_new_note">save new note</string>
+    <string name="share">share</string>
+    <string name="delete">delete</string>
+    <string name="content_description_delete">content description delete</string>
+    <string name="content_description_share">content description share</string>
+    <string name="changed">Изменено</string>
+    <string name="write_header">Введите заголовок</string>
+    <string name="write_text">Введите текст</string>
 </resources>

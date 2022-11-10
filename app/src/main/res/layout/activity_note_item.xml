@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.NoteItemActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topToolbarSecondScreen"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="@dimen/activityEditNoteToolbarElevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/nestedScrollViewPaddingTop"
+            android:paddingBottom="@dimen/nestedScrollViewPaddingBottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLastUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/source_sans_pro_regular400"
+                    android:hint="@string/changed"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="@color/editNoteLastChangeOfDateTextView"
+                    android:textSize="@dimen/editNoteLastChangeOfDateTextViewTextSize"
+                    android:visibility="gone"
+                    tools:ignore="RtlSymmetry" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:boxBackgroundColor="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/source_sans_pro_semi_bold600"
+                        android:gravity="start"
+                        android:hint="@string/write_header"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/editNoteTextColorHint"
+                        android:textSize="@dimen/editNoteViewEditTextHeaderTextSize"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/viewLineActivityNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/editNoteViewLineActivityNoteLayoutHeight"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/editNoteViewLineActivityNoteBackground"
+                    android:backgroundTint="@color/black" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:boxBackgroundColor="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/source_sans_pro_regular400"
+                        android:gravity="start"
+                        android:hint="@string/write_text"
+                        android:importantForAutofill="no"
+                        android:inputType="textMultiLine"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/editNoteTextColorHint"
+                        android:textSize="@dimen/editNoteViewEditTextDescriptionTextSize"
+                        android:textStyle="normal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/toolbarBackgroundBlack"
+            android:theme="@style/Theme.MyNewNote"
+            app:fabAlignmentMode="end"
+            app:hideOnScroll="true"
+            app:menu="@menu/bottom_app_bar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabSaveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/save_new_note"
+            android:focusable="true"
+            app:backgroundTint="@color/colorFAB"
+            app:layout_anchor="@id/bottomAppBar"
+            app:srcCompat="@drawable/ic_baseline_check_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,5 +19,12 @@
     <dimen name="activityMainFABLayoutHeight">56dp</dimen>
     <dimen name="activityMainFABLayoutMarginEnd">15dp</dimen>
     <dimen name="activityMainFABLayoutMarginBottom">16dp</dimen>
+    <dimen name="activityEditNoteToolbarElevation">2dp</dimen>
+    <dimen name="nestedScrollViewPaddingBottom">100dp</dimen>
+    <dimen name="nestedScrollViewPaddingTop">56dp</dimen>
+    <dimen name="editNoteViewLineActivityNoteLayoutHeight">1dp</dimen>
+    <dimen name="editNoteLastChangeOfDateTextViewTextSize">14sp</dimen>
+    <dimen name="editNoteViewEditTextHeaderTextSize">18sp</dimen>
+    <dimen name="editNoteViewEditTextDescriptionTextSize">16sp</dimen>
 
 </resources>
