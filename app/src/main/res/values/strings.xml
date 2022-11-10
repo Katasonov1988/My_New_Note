@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My New Note</string>
+    <string name="add_new_note">add new note</string>
+    <string name="notes_don_not_exist_add_note">У вас нет заметок.\nНажмите + чтобы добавить</string>
 </resources>

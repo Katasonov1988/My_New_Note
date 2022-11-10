@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="noteLinearLayoutCompatLayoutMargin">12dp</dimen>
+    <dimen name="noteCardViewNoteElevation">1dp</dimen>
+    <dimen name="noteCardViewNoteLayoutMargin">4dp</dimen>
+    <dimen name="noteCardViewNoteCardCornerRadius">10dp</dimen>
+    <dimen name="tvHeaderTextSize">15sp</dimen>
+    <dimen name="tvDescriptionTextSize">12sp</dimen>
+    <dimen name="tvDescriptionLayoutMarginTop">4dp</dimen>
+    <dimen name="tvDateMarginTop">6dp</dimen>
+    <dimen name="activityMainRecyclerviewNotesLayoutWidth">0dp</dimen>
+    <dimen name="activityMainRecyclerviewNotesLayoutHeight">0dp</dimen>
+    <dimen name="activityMainRecyclerviewNotesLayoutMargin">16dp</dimen>
+    <dimen name="activityMainImageButtonLayoutWidth">142dp</dimen>
+    <dimen name="activityMainImageButtonLayoutHeight">101dp</dimen>
+    <dimen name="activityMainSearchTextViewLayoutMarginTop">16dp</dimen>
+    <dimen name="activityMainMainToolbarElevation">2dp</dimen>
+    <dimen name="activityMainFABLayoutWidth">56dp</dimen>
+    <dimen name="activityMainFABLayoutHeight">56dp</dimen>
+    <dimen name="activityMainFABLayoutMarginEnd">15dp</dimen>
+    <dimen name="activityMainFABLayoutMarginBottom">16dp</dimen>
+
+</resources>

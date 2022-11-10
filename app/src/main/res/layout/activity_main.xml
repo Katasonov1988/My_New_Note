@@ -6,13 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <TextView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddNote"
+        android:layout_width="@dimen/activityMainFABLayoutWidth"
+        android:layout_height="@dimen/activityMainFABLayoutHeight"
+        android:layout_marginEnd="@dimen/activityMainFABLayoutMarginEnd"
+        android:layout_marginBottom="@dimen/activityMainFABLayoutMarginBottom"
+        android:clickable="true"
+        android:contentDescription="@string/add_new_note"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@color/colorFAB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@android:color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutStartScreen"
+        style="@style/BackgroundLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/textViewWelcomeScreen"
+            style="@style/BackgroundHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activityMainSearchTextViewLayoutMarginTop"
+            android:text="@string/notes_don_not_exist_add_note"
+            app:drawableTopCompat="@drawable/add_note" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mainToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/toolbarBackgroundBlack"
+        android:elevation="@dimen/activityMainMainToolbarElevation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewNotes"
+        android:layout_width="@dimen/activityMainRecyclerviewNotesLayoutWidth"
+        android:layout_height="@dimen/activityMainRecyclerviewNotesLayoutHeight"
+        android:layout_margin="@dimen/activityMainRecyclerviewNotesLayoutMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="2"
+        app:layout_constraintTop_toBottomOf="@+id/mainToolbar"
+        tools:listitem="@layout/note_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,10 @@
 package com.example.mynewnote.domain
 
 import android.provider.ContactsContract
+import androidx.lifecycle.LiveData
 
 class GetNoteItemUseCase(private val noteListRepository: NoteListRepository) {
-    fun getNoteItem (noteItemId: Int): NoteItem {
+   suspend fun getNoteItem (noteItemId: String): NoteItem  {
        return noteListRepository.getNoteItem(noteItemId)
     }
 }
