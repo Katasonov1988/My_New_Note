@@ -25,6 +25,11 @@
     <dimen name="editNoteViewLineActivityNoteLayoutHeight">1dp</dimen>
     <dimen name="editNoteLastChangeOfDateTextViewTextSize">14sp</dimen>
     <dimen name="editNoteViewEditTextHeaderTextSize">18sp</dimen>
+    <dimen name="activitySearchSearchToolbarElevation">2dp</dimen>
+    <dimen name="zeroDp">0dp</dimen>
     <dimen name="editNoteViewEditTextDescriptionTextSize">16sp</dimen>
+    <dimen name="activitySearchRecyclerviewNotesLayoutWidth">0dp</dimen>
+    <dimen name="activitySearchRecyclerviewNotesLayoutHeight">0dp</dimen>
+    <dimen name="activitySearchRecyclerviewNotesLayoutMargin">16dp</dimen>
 
 </resources>

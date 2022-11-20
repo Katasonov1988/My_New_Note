@@ -1,4 +1,4 @@
-package com.example.mynewnote.presentation
+package com.example.mynewnote.presentation.note_list_adapter
 
 import android.graphics.Color
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.example.mynewnote.presentation
+package com.example.mynewnote.presentation.note_list_adapter
 
 import android.view.View
 import android.widget.TextView

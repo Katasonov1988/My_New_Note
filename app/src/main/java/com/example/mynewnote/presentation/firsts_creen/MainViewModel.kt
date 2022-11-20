@@ -1,4 +1,4 @@
-package com.example.mynewnote.presentation
+package com.example.mynewnote.presentation.firsts_creen
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -11,10 +11,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val repository = NoteListRepositoryImpl(application)
 
     private val getNoteListUseCase = GetNoteListUseCase(repository)
-    private val getNoteItemUseCase = GetNoteItemUseCase(repository)
     private val deleteNoteItemUseCase = DeleteNoteItemUseCase(repository)
-
-    private val addNoteItemUseCase = AddNoteItemUseCase(repository)
 
     fun deleteNoteItem (noteItem: NoteItem) {
         viewModelScope.launch {
