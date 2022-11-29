@@ -18,27 +18,35 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynewnote.R
+import com.example.mynewnote.databinding.ActivityNoteItemBinding
+import com.example.mynewnote.databinding.ActivitySearchBinding
 import com.example.mynewnote.domain.NoteItem
 import com.example.mynewnote.presentation.edit_noteitem_screen.NoteItemActivity
 import com.example.mynewnote.presentation.note_list_adapter.NoteListAdapter
 
 class SearchNoteItemActivity : AppCompatActivity() {
-    private lateinit var searchToolbar: Toolbar
+    private lateinit var binding: ActivitySearchBinding
+    private lateinit var viewModel: SearchViewModel
+    private lateinit var adapter: NoteListAdapter
+
+
     private lateinit var searchView: SearchView
     private lateinit var searchTextView: TextView
-    private lateinit var viewModel: SearchViewModel
+
     private var textFromSearchView: String? = null
-    private lateinit var adapter: NoteListAdapter
     private var textFromBundleToSearchView: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setColorStatusBar()
         Log.d("SearchActivity", "onCreate")
         super.onCreate(savedInstanceState)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        val view = binding.root
+
         if (savedInstanceState != null) {
            textFromBundleToSearchView = savedInstanceState.getString("TextFromSearchView")
         }
-        setContentView(R.layout.activity_search)
+        setContentView(view)
         setupRecyclerView()
         initTopToolBarFirstScreen()
 
@@ -52,9 +60,8 @@ class SearchNoteItemActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val rvSearchList = findViewById<RecyclerView>(R.id.recyclerviewSearchNotes)
         adapter = NoteListAdapter()
-        rvSearchList.adapter = adapter
+      binding.recyclerviewSearchNotes.adapter = adapter
         setupItemShortClickListener()
     }
 
@@ -74,9 +81,8 @@ class SearchNoteItemActivity : AppCompatActivity() {
     }
 
     private fun initTopToolBarFirstScreen() {
-        searchToolbar = findViewById(R.id.searchToolbar)
-        setSupportActionBar(searchToolbar)
-        with(searchToolbar) {
+        setSupportActionBar(binding.searchToolbar)
+        with(binding.searchToolbar) {
             setNavigationIcon(R.drawable.ic_baseline_arrow_white_24)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             setNavigationOnClickListener {

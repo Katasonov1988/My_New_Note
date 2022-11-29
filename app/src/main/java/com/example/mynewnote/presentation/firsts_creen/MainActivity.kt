@@ -2,11 +2,9 @@ package com.example.mynewnote.presentation.firsts_creen
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynewnote.R
+import com.example.mynewnote.databinding.ActivityMainBinding
 import com.example.mynewnote.domain.NoteItem
 import com.example.mynewnote.presentation.DeleteDialogFragment
 import com.example.mynewnote.presentation.edit_noteitem_screen.NoteItemActivity
@@ -22,21 +21,24 @@ import com.example.mynewnote.presentation.search_noteitem_screen.SearchNoteItemA
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToNoteActivity, DeleteDialogFragment.CancelDeleteItemCallBack {
+    private lateinit var binding: ActivityMainBinding
 
     private lateinit var viewModel: MainViewModel
     private lateinit var noteListAdapter: NoteListAdapter
-    private lateinit var textViewWelcomeScreen: TextView
-    private lateinit var topToolBarFirstScreen: Toolbar
+
     private var itemForDelete: NoteItem? = null
     private var itemPosition: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setColorStatusBar()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        setContentView(view)
         setupRecyclerView()
         initTopToolBarFirstScreen()
-        textViewWelcomeScreen = findViewById(R.id.textViewWelcomeScreen)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.noteList.observe(this) {
             Log.d("MainActivityTest", it.size.toString())
@@ -44,8 +46,7 @@ class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToN
             changeMainScreen(it)
 
         }
-        val buttonAddNoteItem = findViewById<FloatingActionButton>(R.id.fabAddNote)
-        buttonAddNoteItem.setOnClickListener {
+        binding.fabAddNote.setOnClickListener {
             val intent = NoteItemActivity.newIntentAddItem(this)
             startActivity(intent)
         }
@@ -58,9 +59,8 @@ class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToN
     }
 
     private fun  initTopToolBarFirstScreen() {
-        topToolBarFirstScreen = findViewById(R.id.mainToolbar)
-        setSupportActionBar(topToolBarFirstScreen)
-        with(topToolBarFirstScreen) {
+        setSupportActionBar(binding.mainToolbar)
+        with(binding.mainToolbar) {
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
     }
@@ -79,22 +79,21 @@ class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToN
     private fun changeMainScreen( list: List<NoteItem>) {
         if (list.isEmpty()) {
             Log.d("rem",list.size.toString())
-            textViewWelcomeScreen.visibility = View.VISIBLE
+           binding.textViewWelcomeScreen.visibility = View.VISIBLE
             supportActionBar?.hide()
 
         } else {
             Log.d("rem",list.size.toString())
-            textViewWelcomeScreen.visibility = View.GONE
+            binding.textViewWelcomeScreen.visibility = View.GONE
             supportActionBar?.show()
         }
     }
 
     private fun setupRecyclerView() {
-        val rvNoteList = findViewById<RecyclerView>(R.id.recyclerviewNotes)
         noteListAdapter = NoteListAdapter()
-        rvNoteList.adapter = noteListAdapter
+      binding.recyclerviewNotes.adapter = noteListAdapter
         setupItemShortClickListener()
-        setupSwipeListener(rvNoteList)
+        setupSwipeListener(binding.recyclerviewNotes)
 
     }
 
