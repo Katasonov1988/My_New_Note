@@ -16,4 +16,11 @@
         android:title="@string/share"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction"/>
+    <item
+        android:id="@+id/bottomAppBarBackToHome"
+        android:contentDescription="@string/content_description_share"
+        android:icon="@drawable/ic_baseline_notes_24"
+        android:title="@string/back_to_home"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction"/>
 </menu>

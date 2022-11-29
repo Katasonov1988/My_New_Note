@@ -50,12 +50,18 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilHeader"
+                    android:theme="@style/EditTextThemeOverlay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/editNoteTextColorHint"
+                    app:hintTextColor="@color/editNoteTextColorHint"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    app:boxBackgroundColor="@color/white">
+                    android:backgroundTint="@color/black"
+                    app:boxBackgroundColor="@color/white"
+
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etHeader"
@@ -70,6 +76,7 @@
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
                         android:textColor="@color/black"
+                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:textColorHint="@color/editNoteTextColorHint"
                         android:textSize="@dimen/editNoteViewEditTextHeaderTextSize"
                         android:textStyle="bold" />
@@ -89,6 +96,9 @@
                     android:id="@+id/tilDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:theme="@style/EditTextThemeOverlay"
+                    android:textColorHint="@color/editNoteTextColorHint"
+                    app:hintTextColor="@color/editNoteTextColorHint"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
@@ -102,6 +112,7 @@
                         android:fontFamily="@font/source_sans_pro_regular400"
                         android:gravity="start"
                         android:hint="@string/write_text"
+                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine"
                         android:paddingStart="0dp"

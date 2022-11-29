@@ -88,8 +88,8 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    private fun parseHeader(inputName: String?): String {
-        return inputName?.trim() ?: ""
+    private fun parseHeader(inputHeader: String?): String {
+        return inputHeader?.trim() ?: ""
     }
 
     private fun parseDescription(inputDescription: String?): String {

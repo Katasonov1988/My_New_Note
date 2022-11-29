@@ -12,6 +12,11 @@ import com.example.mynewnote.R
 class DeleteDialogFragment : DialogFragment() {
 
     var deleteCallBackToNoteActivity: DeleteCallBackToNoteActivity? = null
+    var cancelDeleteCallBackToNoteActivity: CancelDeleteItemCallBack? = null
+
+    interface CancelDeleteItemCallBack {
+        fun onCancelDeleteItemClicked()
+    }
 
     interface DeleteCallBackToNoteActivity {
         fun onDeleteButtonClicked()
@@ -25,6 +30,7 @@ class DeleteDialogFragment : DialogFragment() {
             builder.setMessage(R.string.dialog_message)
                 .setPositiveButton(R.string.button_cancel,
                     DialogInterface.OnClickListener { dialog, id ->
+//                        cancelDeleteCallBackToNoteActivity?.onCancelDeleteItemClicked()
                         dialog.dismiss()
                         Log.d("Dialog", "заметка удалена")
                     })
@@ -34,6 +40,7 @@ class DeleteDialogFragment : DialogFragment() {
                         dialog.dismiss()
                         Log.d("Dialog", "заметка не удалена")
                     })
+
             // Create the AlertDialog object and return it
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
@@ -43,8 +50,14 @@ class DeleteDialogFragment : DialogFragment() {
         super.onAttach(context)
 
             deleteCallBackToNoteActivity = getContext() as DeleteCallBackToNoteActivity
+            cancelDeleteCallBackToNoteActivity = getContext() as CancelDeleteItemCallBack
 
+    }
 
+    override fun onDismiss(dialog: DialogInterface) {
+        Log.d("dialog", "onDismiss")
+        cancelDeleteCallBackToNoteActivity?.onCancelDeleteItemClicked()
+        super.onDismiss(dialog)
     }
 
     companion object {

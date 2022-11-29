@@ -44,11 +44,10 @@ class NoteListRepositoryImpl(
         }
     }
 
-    override fun searchNoteLst(letter: String): LiveData<List<NoteItem>>  {
-        return  Transformations.map(noteDao.searchNote(letter)) {
-            it.map {
-                mapper.mapDBModelToEntity(it)
-            }
+    override suspend fun searchNoteLst(newText: String): List<NoteItem> {
+        return noteDao.searchNote(newText).map {
+            mapper.mapDBModelToEntity(it)
         }
     }
+
 }

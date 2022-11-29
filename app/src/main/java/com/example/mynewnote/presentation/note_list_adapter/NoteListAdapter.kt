@@ -1,6 +1,7 @@
 package com.example.mynewnote.presentation.note_list_adapter
 
 import android.graphics.Color
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ class NoteListAdapter : ListAdapter<NoteItem, NoteItemViewHolder>(NoteItemDiffCa
 
     var onNoteItemClickListener: ((NoteItem) -> Unit)? = null
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.note_item,
@@ -24,14 +27,16 @@ class NoteListAdapter : ListAdapter<NoteItem, NoteItemViewHolder>(NoteItemDiffCa
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
         val noteItem = getItem(position)
-        if (noteItem.header.isEmpty()) {
-            holder.tvHeader.setVisibility(View.GONE)
-        } else {
+        if (!noteItem.header.isEmpty()) {
+            holder.tvHeader.visibility = View.VISIBLE
             holder.tvHeader.text = noteItem.header
+        } else {
+            holder.tvHeader.visibility = View.GONE
         }
         if (noteItem.description.isEmpty()) {
-            holder.tvDescription.setVisibility(View.GONE)
+            holder.tvDescription.visibility = View.GONE
         } else {
+            holder.tvDescription.visibility = View.VISIBLE
             holder.tvDescription.text = noteItem.description
         }
         holder.tvData.text = noteItem.date.substring(0, noteItem.date.length - 5)
@@ -42,5 +47,8 @@ class NoteListAdapter : ListAdapter<NoteItem, NoteItemViewHolder>(NoteItemDiffCa
         holder.view.setOnClickListener {
             onNoteItemClickListener?.invoke(noteItem)
         }
+    }
+   fun restoreItem (position: Int) {
+       notifyItemChanged(position)
     }
 }

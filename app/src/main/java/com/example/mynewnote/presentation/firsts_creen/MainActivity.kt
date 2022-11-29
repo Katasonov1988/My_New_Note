@@ -1,10 +1,11 @@
 package com.example.mynewnote.presentation.firsts_creen
 
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
@@ -20,24 +21,25 @@ import com.example.mynewnote.presentation.note_list_adapter.NoteListAdapter
 import com.example.mynewnote.presentation.search_noteitem_screen.SearchNoteItemActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToNoteActivity {
+class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToNoteActivity, DeleteDialogFragment.CancelDeleteItemCallBack {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var noteListAdapter: NoteListAdapter
     private lateinit var textViewWelcomeScreen: TextView
     private lateinit var topToolBarFirstScreen: Toolbar
     private var itemForDelete: NoteItem? = null
+    private var itemPosition: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setColorStatusBar()
         super.onCreate(savedInstanceState)
-//        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
         setupRecyclerView()
         initTopToolBarFirstScreen()
         textViewWelcomeScreen = findViewById(R.id.textViewWelcomeScreen)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.noteList.observe(this) {
-            Log.d("MainActivityTest", it.toString())
+            Log.d("MainActivityTest", it.size.toString())
             noteListAdapter.submitList(it)
             changeMainScreen(it)
 
@@ -47,7 +49,12 @@ class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToN
             val intent = NoteItemActivity.newIntentAddItem(this)
             startActivity(intent)
         }
+    }
 
+
+    private fun setColorStatusBar() {
+        val window = this.window
+        window.statusBarColor = this.resources.getColor(R.color.black, theme.resources.newTheme())
     }
 
     private fun  initTopToolBarFirstScreen() {
@@ -112,18 +119,40 @@ class MainActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToN
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                itemPosition = viewHolder.adapterPosition
                 val deleteDialogFragment = DeleteDialogFragment()
-                deleteDialogFragment.show(supportFragmentManager,"delete")
+                deleteDialogFragment.show(supportFragmentManager, "delete")
                 itemForDelete = noteListAdapter.currentList[viewHolder.adapterPosition]
+
+
+
             }
-
         }
-
         val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(rvNoteList)
+
     }
 
+
+
     override fun onDeleteButtonClicked() {
-             itemForDelete?.let { viewModel.deleteNoteItem(it) }
+             itemForDelete?.let {
+                 viewModel.deleteNoteItem(it) }
     }
+
+
+    override fun onCancelDeleteItemClicked() {
+        itemPosition?.let {
+            noteListAdapter.restoreItem(it)
+        }
+
+    }
+
+    companion object {
+        fun newIntentHomeScreen(context: Context): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            return intent
+        }
+    }
+
 }

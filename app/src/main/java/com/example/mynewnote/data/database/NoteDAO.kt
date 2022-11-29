@@ -13,11 +13,11 @@ interface NoteDAO {
 
     @Query(
         "SELECT * FROM notes WHERE " +
-            "header LIKE '%' || :letter || '%' OR" +
-            " description LIKE '%' || :letter || '%'" +
+            "header LIKE '%' || :newText || '%' OR" +
+            " description LIKE '%' || :newText || '%'" +
             " ORDER BY date DESC"
     )
-    fun searchNote(letter: String): LiveData<List<NoteDBModel>>
+    suspend fun searchNote(newText: String): List<NoteDBModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote (note: NoteDBModel)

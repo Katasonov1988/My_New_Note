@@ -16,6 +16,8 @@
     <string name="search_note">search note</string>
     <string name="search_button">search_button</string>
     <string name="for_search_enter_text">Для поиска введите запрос</string>
+    <string name="search_nothing">Ничего не найдено</string>
     <string name="found_nothing">Ничего не найдено</string>
-    <string name="search">Search</string>
+    <string name="search">Поиск</string>
+    <string name="back_to_home">back to home</string>
 </resources>
