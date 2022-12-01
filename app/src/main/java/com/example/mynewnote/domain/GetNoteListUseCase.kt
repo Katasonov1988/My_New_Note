@@ -1,8 +1,9 @@
 package com.example.mynewnote.domain
 
-class GetNoteListUseCase(private val noteListRepository: NoteListRepository) {
+import androidx.lifecycle.LiveData
 
-    fun getNoteList(): List<NoteItem> {
+class GetNoteListUseCase(private val noteListRepository: NoteListRepository) {
+    fun getNoteList(): LiveData<List<NoteItem>> {
         return noteListRepository.getNoteList()
     }
 }

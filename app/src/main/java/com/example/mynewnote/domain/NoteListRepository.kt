@@ -1,16 +1,13 @@
 package com.example.mynewnote.domain
 
-interface NoteListRepository  {
+import androidx.lifecycle.LiveData
 
-    fun addNoteItem (noteItem: NoteItem)
+interface NoteListRepository {
+    suspend fun addNoteItem(noteItem: NoteItem)
+    suspend fun deleteNoteItem(noteItem: NoteItem)
+    suspend fun editNoteItem(noteItem: NoteItem)
+    suspend fun getNoteItem(noteItemId: String): NoteItem
+    suspend fun searchNoteLst(newText: String): List<NoteItem>
+    fun getNoteList(): LiveData<List<NoteItem>>
 
-    fun deleteNoteItem (noteItem: NoteItem)
-
-    fun editNoteItem (noteItem: NoteItem)
-
-    fun getNoteItem (noteItemId: Int): NoteItem
-
-    fun getNoteList(): List<NoteItem>
-
-    fun searchNoteLst (letter: String): List<NoteItem>
 }
