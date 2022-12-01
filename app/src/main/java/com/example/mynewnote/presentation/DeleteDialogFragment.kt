@@ -24,15 +24,12 @@ class DeleteDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it, R.style.AlertDialogTheme)
 
             builder.setMessage(R.string.dialog_message)
                 .setPositiveButton(R.string.button_cancel,
                     DialogInterface.OnClickListener { dialog, id ->
-//                        cancelDeleteCallBackToNoteActivity?.onCancelDeleteItemClicked()
                         dialog.dismiss()
-                        Log.d("Dialog", "заметка удалена")
                     })
                 .setNegativeButton(R.string.button_delete,
                     DialogInterface.OnClickListener { dialog, id ->
@@ -40,18 +37,14 @@ class DeleteDialogFragment : DialogFragment() {
                         dialog.dismiss()
                         Log.d("Dialog", "заметка не удалена")
                     })
-
-            // Create the AlertDialog object and return it
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
-            deleteCallBackToNoteActivity = getContext() as DeleteCallBackToNoteActivity
-            cancelDeleteCallBackToNoteActivity = getContext() as CancelDeleteItemCallBack
-
+        deleteCallBackToNoteActivity = getContext() as DeleteCallBackToNoteActivity
+        cancelDeleteCallBackToNoteActivity = getContext() as CancelDeleteItemCallBack
     }
 
     override fun onDismiss(dialog: DialogInterface) {
@@ -63,5 +56,4 @@ class DeleteDialogFragment : DialogFragment() {
     companion object {
         private const val TAG = "DeleteDialogFragment"
     }
-
 }

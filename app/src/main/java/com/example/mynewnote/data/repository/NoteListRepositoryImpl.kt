@@ -7,16 +7,13 @@ import com.example.mynewnote.data.database.NotesDataBase
 import com.example.mynewnote.data.mapper.NoteMapper
 import com.example.mynewnote.domain.NoteItem
 import com.example.mynewnote.domain.NoteListRepository
-import kotlinx.coroutines.coroutineScope
 
 class NoteListRepositoryImpl(
-    private val application: Application
-): NoteListRepository {
+    application: Application
+) : NoteListRepository {
 
     private val noteDao = NotesDataBase.getInstance(application).noteDao()
     private val mapper = NoteMapper()
-
-
 
     override suspend fun addNoteItem(noteItem: NoteItem) {
         noteDao.insertNote(mapper.mapEntityToDBModel(noteItem))
@@ -30,13 +27,13 @@ class NoteListRepositoryImpl(
         noteDao.insertNote(mapper.mapEntityToDBModel(noteItem))
     }
 
-    override suspend fun getNoteItem(noteItemId: String): NoteItem  {
+    override suspend fun getNoteItem(noteItemId: String): NoteItem {
         val dbModel = noteDao.getNoteById(noteItemId)
-            return mapper.mapDBModelToEntity(dbModel)
+        return mapper.mapDBModelToEntity(dbModel)
 
     }
 
-    override fun getNoteList(): LiveData<List<NoteItem>>  {
+    override fun getNoteList(): LiveData<List<NoteItem>> {
         return Transformations.map(noteDao.getAllNotes()) {
             it.map {
                 mapper.mapDBModelToEntity(it)

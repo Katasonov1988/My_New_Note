@@ -2,29 +2,23 @@ package com.example.mynewnote.presentation.edit_noteitem_screen
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.example.mynewnote.R
-import com.example.mynewnote.databinding.ActivityMainBinding
 import com.example.mynewnote.databinding.ActivityNoteItemBinding
 import com.example.mynewnote.presentation.DeleteDialogFragment
 import com.example.mynewnote.presentation.firsts_creen.MainActivity
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputLayout
 import java.lang.RuntimeException
 
-class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBackToNoteActivity,DeleteDialogFragment.CancelDeleteItemCallBack {
+class NoteItemActivity : AppCompatActivity(),
+    DeleteDialogFragment.DeleteCallBackToNoteActivity,
+    DeleteDialogFragment.CancelDeleteItemCallBack {
+
     private lateinit var binding: ActivityNoteItemBinding
-
-
     private lateinit var viewModel: NoteItemViewModel
 
     private var screenMode = MODE_UNKNOWN
@@ -39,19 +33,21 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
         initTopToolbarSecondScreen()
         buttonsBottomAppBar()
         parseIntent()
+
         viewModel = ViewModelProvider(this)[NoteItemViewModel::class.java]
+        viewModel.shouldCloseScreen.observe(this) {
+            finish()
+        }
 
         when (screenMode) {
             MODE_EDIT -> launchEditMode()
             MODE_ADD -> launchAddMode()
         }
-        viewModel.shouldCloseScreen.observe(this) {
-            finish()
-        }
+
     }
 
     private fun buttonsBottomAppBar() {
-       binding.bottomAppBar.setOnMenuItemClickListener {
+        binding.bottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.bottomAppBarDelete -> {
                     callDeleteDialog()
@@ -62,7 +58,7 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
                     true
                 }
                 R.id.bottomAppBarBackToHome -> {
-                    goToHomeScreen ()
+                    goToHomeScreen()
                     true
                 }
                 else -> false
@@ -70,13 +66,16 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
         }
     }
 
-    private fun goToHomeScreen () {
-     val intent = MainActivity.newIntentHomeScreen(this)
-     startActivity(intent)
+    private fun goToHomeScreen() {
+        val intent = MainActivity.newIntentHomeScreen(this)
+        startActivity(intent)
     }
 
     private fun shareNote() {
-        if (binding.etHeader.text?.isBlank() == true && binding.etDescription.text?.isBlank() == true) {
+        if (
+            binding.etHeader.text?.isBlank() == true &&
+            binding.etDescription.text?.isBlank() == true
+        ) {
             val toast = Toast.makeText(
                 this,
                 ALL_LINE_EMPTY,
@@ -113,27 +112,39 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
             binding.etHeader.setText(it.header)
             binding.etDescription.setText(it.description)
         }
-       binding.fabSaveNote.setOnClickListener {
-            if (binding.etHeader.text?.isEmpty() == true && binding.etDescription.text?.isEmpty() == true){
+        binding.fabSaveNote.setOnClickListener {
+            if (
+                binding.etHeader.text?.isEmpty() == true &&
+                binding.etDescription.text?.isEmpty() == true
+            ) {
                 onDeleteButtonClicked()
             }
-            viewModel.editNoteItem(binding.etHeader.text?.toString(), binding.etDescription.text?.toString())
+            viewModel.editNoteItem(
+                binding.etHeader.text?.toString(),
+                binding.etDescription.text?.toString()
+            )
         }
     }
 
     private fun launchAddMode() {
         binding.fabSaveNote.setOnClickListener {
-            if (binding.etHeader.text?.isEmpty() == true && binding.etDescription.text?.isEmpty() == true){
+            if (
+                binding.etHeader.text?.isEmpty() == true &&
+                binding.etDescription.text?.isEmpty() == true
+            ) {
                 finish()
             }
-            viewModel.addNoteItem(binding.etHeader.text?.toString(), binding.etDescription.text?.toString())
+            viewModel.addNoteItem(
+                binding.etHeader.text?.toString(),
+                binding.etDescription.text?.toString()
+            )
         }
     }
 
     private fun callDeleteDialog() {
         if (screenMode == MODE_EDIT) {
             val deleteDialogFragment = DeleteDialogFragment()
-            deleteDialogFragment.show(supportFragmentManager, "delete")
+            deleteDialogFragment.show(supportFragmentManager, DELETE)
         } else {
             val toast = Toast.makeText(
                 this,
@@ -166,7 +177,7 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
     }
 
     companion object {
-        private const val NOTE_WAS_DELETED = "Заметка удалена"
+        private const val DELETE = "delete"
         private const val NOTHING_TO_DELETE = "Нечего удалять"
         private const val ALL_LINE_EMPTY = "Все поля пустые, нечего отправлять"
         private const val EXTRA_SCREEN_MODE = "extra_mode"
@@ -194,22 +205,10 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
             viewModel.deleteNoteFromNoteItemActivity(it)
             finish()
         }
-
     }
 
-    private fun saveNoteForBackButton(){
+    private fun saveNoteForBackButton() {
         finish()
-//
-//        if (etHeader.text.isEmpty() && etDescription.text.isEmpty()){
-//            Toast.makeText(this,NOTE_WAS_DELETED, Toast.LENGTH_SHORT).show()
-//            onDeleteButtonClicked()
-//        }  else {
-//            when (screenMode) {
-//                MODE_EDIT -> viewModel.editNoteItem(etHeader.text?.toString(), etDescription.text?.toString())
-//                MODE_ADD -> viewModel.addNoteItem(etHeader.text?.toString(), etDescription.text?.toString())
-//            }
-//            finish()
-//        }
     }
 
     private fun setColorStatusBar() {
@@ -218,7 +217,7 @@ class NoteItemActivity : AppCompatActivity(), DeleteDialogFragment.DeleteCallBac
     }
 
     override fun onCancelDeleteItemClicked() {
-    Log.d("NoteItemActivity","нажата кнопка отмены в диалоге")
+        Log.d("NoteItemActivity", "нажата кнопка отмены в диалоге")
     }
 
 }

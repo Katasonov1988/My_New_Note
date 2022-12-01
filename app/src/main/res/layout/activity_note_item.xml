@@ -36,13 +36,13 @@
                     android:id="@+id/tvLastUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/activityNoteTvLastUpdateMargin"
+                    android:layout_marginTop="@dimen/activityNoteTvLastUpdateMargin"
+                    android:layout_marginEnd="@dimen/activityNoteTvLastUpdateMargin"
                     android:fontFamily="@font/source_sans_pro_regular400"
                     android:hint="@string/changed"
-                    android:paddingStart="0dp"
-                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/activityNoteTvLastUpdatePadding"
+                    android:paddingEnd="@dimen/activityNoteTvLastUpdatePadding"
                     android:textColor="@color/editNoteLastChangeOfDateTextView"
                     android:textSize="@dimen/editNoteLastChangeOfDateTextViewTextSize"
                     android:visibility="gone"
@@ -50,16 +50,15 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilHeader"
-                    android:theme="@style/EditTextThemeOverlay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/editNoteTextColorHint"
-                    app:hintTextColor="@color/editNoteTextColorHint"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/activityNoteTextInputLayoutmargin"
+                    android:layout_marginTop="@dimen/activityNoteTextInputLayoutmargin"
+                    android:layout_marginEnd="@dimen/activityNoteTextInputLayoutmargin"
                     android:backgroundTint="@color/black"
+                    android:theme="@style/EditTextThemeOverlay"
                     app:boxBackgroundColor="@color/white"
+                    app:hintTextColor="@color/editNoteTextColorHint"
 
                     >
 
@@ -73,11 +72,11 @@
                         android:hint="@string/write_header"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="@dimen/activityNoteTextInputEditTextPaddingStart"
+                        android:paddingEnd="@dimen/activityNoteTextInputEditTextPaddingEnd"
                         android:textColor="@color/black"
-                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:textColorHint="@color/editNoteTextColorHint"
+                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:textSize="@dimen/editNoteViewEditTextHeaderTextSize"
                         android:textStyle="bold" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -86,9 +85,9 @@
                     android:id="@+id/viewLineActivityNote"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/editNoteViewLineActivityNoteLayoutHeight"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/activityNoteViewMarginStart"
+                    android:layout_marginTop="@dimen/activityNoteViewMarginTop"
+                    android:layout_marginEnd="@dimen/activityNoteViewMarginEnd"
                     android:background="@color/editNoteViewLineActivityNoteBackground"
                     android:backgroundTint="@color/black" />
 
@@ -96,13 +95,12 @@
                     android:id="@+id/tilDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activityNoteTextFieldMarginStart"
+                    android:layout_marginTop="@dimen/activityNoteTextFieldMarginEnd"
+                    android:layout_marginEnd="@dimen/activityNoteTextFieldMarginEnd"
                     android:theme="@style/EditTextThemeOverlay"
-                    android:textColorHint="@color/editNoteTextColorHint"
-                    app:hintTextColor="@color/editNoteTextColorHint"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:boxBackgroundColor="@color/white">
+                    app:boxBackgroundColor="@color/white"
+                    app:hintTextColor="@color/editNoteTextColorHint">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etDescription"
@@ -112,13 +110,13 @@
                         android:fontFamily="@font/source_sans_pro_regular400"
                         android:gravity="start"
                         android:hint="@string/write_text"
-                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:importantForAutofill="no"
                         android:inputType="textMultiLine"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
+                        android:paddingStart="@dimen/activityNoteTextFieldPaddingStart"
+                        android:paddingEnd="@dimen/activityNoteTextFieldPaddingEnd"
                         android:textColor="@color/black"
                         android:textColorHint="@color/editNoteTextColorHint"
+                        android:textCursorDrawable="@color/editNoteTextColorHint"
                         android:textSize="@dimen/editNoteViewEditTextDescriptionTextSize"
                         android:textStyle="normal" />
                 </com.google.android.material.textfield.TextInputLayout>

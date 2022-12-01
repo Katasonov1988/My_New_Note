@@ -20,11 +20,11 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
 
     private val _noteItem = MutableLiveData<NoteItem>()
     val noteItem: LiveData<NoteItem>
-    get() = _noteItem
+        get() = _noteItem
 
     private val _shouldCloseScreen = MutableLiveData<Unit>()
     val shouldCloseScreen: LiveData<Unit>
-    get() = _shouldCloseScreen
+        get() = _shouldCloseScreen
 
     fun getNoteItem(noteItemId: String) {
         viewModelScope.launch {
@@ -33,9 +33,7 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-
-
-    fun deleteNoteFromNoteItemActivity (noteItem: NoteItem) {
+    fun deleteNoteFromNoteItemActivity(noteItem: NoteItem) {
         viewModelScope.launch {
             deleteNoteItemUseCase.deleteNoteItem(noteItem)
         }
@@ -79,8 +77,6 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-
-
     fun deleteNoteItem(noteItem: NoteItem) {
         viewModelScope.launch {
             deleteNoteItemUseCase.deleteNoteItem(noteItem)
@@ -89,11 +85,20 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun parseHeader(inputHeader: String?): String {
-        return inputHeader?.trim() ?: ""
+        return inputHeader?.trim() ?: EMPTY_LINE
     }
 
     private fun parseDescription(inputDescription: String?): String {
-        return inputDescription?.trim() ?: ""
+        return inputDescription?.trim() ?: EMPTY_LINE
+    }
+
+    private fun getCurrentDate(): String {
+        val sdf = SimpleDateFormat(PATTERN_FOR_TIME, Locale.getDefault())
+        return sdf.format(Date())
+    }
+
+    private fun getId(): String {
+        return UUID.randomUUID().toString().replace(DASH, EMPTY_LINE).trim()
     }
 
     private fun getItemColor(): String {
@@ -107,36 +112,28 @@ class NoteItemViewModel(application: Application) : AndroidViewModel(application
         return listColor[randomIndex]
     }
 
-    private fun getCurrentDate(): String {
-        val sdf = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
-        return sdf.format(Date())
-    }
-
-    private fun getId(): String {
-        return UUID.randomUUID().toString().replace("-", "").trim()
+    private fun finishWork() {
+        _shouldCloseScreen.value = Unit
     }
 
     private fun validateInput(header: String, description: String): Boolean {
         var result = true
         if (header.isBlank() && description.isBlank()) {
-//            TODO: show error input name
-            Log.i("NoteItemViewModel", "Lines is empty")
-
             result = false
         }
         return result
     }
-    private fun finishWork() {
-        _shouldCloseScreen.value = Unit
-    }
+
 
     companion object {
+        private const val PATTERN_FOR_TIME = "dd.MM.yyyy HH:mm"
+        private const val DASH = "-"
+        private const val EMPTY_LINE = ""
         private const val FIRST_COLOR = "#FDCCCA"
         private const val SECOND_COLOR = "#C3D9FF"
         private const val THIRD_COLOR = "#BFE399"
         private const val FOURTH_COLOR = "#F4BD6A"
         private const val FIFTH_COLOR = "#E46B98"
-
     }
 
 }

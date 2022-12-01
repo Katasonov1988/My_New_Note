@@ -1,8 +1,6 @@
 package com.example.mynewnote.presentation.note_list_adapter
 
 import android.graphics.Color
-import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +11,6 @@ import com.example.mynewnote.domain.NoteItem
 class NoteListAdapter : ListAdapter<NoteItem, NoteItemViewHolder>(NoteItemDiffCallback()) {
 
     var onNoteItemClickListener: ((NoteItem) -> Unit)? = null
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -41,14 +37,14 @@ class NoteListAdapter : ListAdapter<NoteItem, NoteItemViewHolder>(NoteItemDiffCa
         }
         holder.tvData.text = noteItem.date.substring(0, noteItem.date.length - 5)
         val color = noteItem.color
-        Log.i("color", color)
         holder.cardView.setCardBackgroundColor(Color.parseColor(color))
 
         holder.view.setOnClickListener {
             onNoteItemClickListener?.invoke(noteItem)
         }
     }
-   fun restoreItem (position: Int) {
-       notifyItemChanged(position)
+
+    fun restoreItem(position: Int) {
+        notifyItemChanged(position)
     }
 }

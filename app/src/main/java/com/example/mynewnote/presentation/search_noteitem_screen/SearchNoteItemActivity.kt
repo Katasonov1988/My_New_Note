@@ -6,51 +6,40 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mynewnote.R
-import com.example.mynewnote.databinding.ActivityNoteItemBinding
 import com.example.mynewnote.databinding.ActivitySearchBinding
 import com.example.mynewnote.domain.NoteItem
 import com.example.mynewnote.presentation.edit_noteitem_screen.NoteItemActivity
 import com.example.mynewnote.presentation.note_list_adapter.NoteListAdapter
 
 class SearchNoteItemActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivitySearchBinding
     private lateinit var viewModel: SearchViewModel
     private lateinit var adapter: NoteListAdapter
-
-
     private lateinit var searchView: SearchView
-    private lateinit var searchTextView: TextView
 
     private var textFromSearchView: String? = null
     private var textFromBundleToSearchView: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setColorStatusBar()
-        Log.d("SearchActivity", "onCreate")
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         val view = binding.root
 
         if (savedInstanceState != null) {
-           textFromBundleToSearchView = savedInstanceState.getString("TextFromSearchView")
+            textFromBundleToSearchView = savedInstanceState.getString("TextFromSearchView")
         }
         setContentView(view)
         setupRecyclerView()
         initTopToolBarFirstScreen()
-
-        searchTextView = findViewById(R.id.searchTextView)
 
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
         viewModel.ldListNotes.observe(this) {
@@ -61,7 +50,7 @@ class SearchNoteItemActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = NoteListAdapter()
-      binding.recyclerviewSearchNotes.adapter = adapter
+        binding.recyclerviewSearchNotes.adapter = adapter
         setupItemShortClickListener()
     }
 
@@ -77,7 +66,8 @@ class SearchNoteItemActivity : AppCompatActivity() {
             val intent = Intent(context, SearchNoteItemActivity::class.java)
             return intent
         }
-        private const val search = "Search"
+
+        private const val SEARCH = "Search"
     }
 
     private fun initTopToolBarFirstScreen() {
@@ -99,15 +89,13 @@ class SearchNoteItemActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.search_menu, menu)
-
         val searchItem: MenuItem = menu?.findItem(R.id.search_button)
             ?: return super.onCreateOptionsMenu(menu)
-
         searchItem.expandActionView()
         val searchView: SearchView = searchItem.actionView as SearchView
         this.searchView = searchView
         textFromBundleToSearchView?.let {
-            searchView.setQuery(textFromBundleToSearchView,false)
+            searchView.setQuery(textFromBundleToSearchView, false)
         }
 
 
@@ -125,7 +113,7 @@ class SearchNoteItemActivity : AppCompatActivity() {
 
         with(searchView) {
             maxWidth = Int.MAX_VALUE
-            queryHint = search
+            queryHint = SEARCH
             isFocusable = true
             isIconified = false
             requestFocusFromTouch()
@@ -149,63 +137,23 @@ class SearchNoteItemActivity : AppCompatActivity() {
 
     private fun emptyQueryState() {
         viewModel.setZeroValueToList()
-        searchTextView.visibility = View.VISIBLE
-        searchTextView.setText(R.string.for_search_enter_text)
+        binding.searchTextView.visibility = View.VISIBLE
+        binding.searchTextView.setText(R.string.for_search_enter_text)
     }
 
     private fun changeSearchScreenPictures(list: List<NoteItem>) {
         if (list.isEmpty()) {
-            Log.d("rem", list.size.toString())
-            searchTextView.visibility = View.VISIBLE
-            searchTextView.setText(R.string.search_nothing)
+            binding.searchTextView.visibility = View.VISIBLE
+            binding.searchTextView.setText(R.string.search_nothing)
         } else {
-            Log.d("rem", list.size.toString())
-            searchTextView.visibility = View.GONE
+            binding.searchTextView.visibility = View.GONE
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        Log.d("SearchActivity", "onSaveInstanceState")
         textFromSearchView = searchView.query.toString()
         outState.putString("TextFromSearchView", textFromSearchView)
         super.onSaveInstanceState(outState)
-    }
-
-
-    override fun onStart() {
-        Log.d("SearchActivity", "onStart")
-        textFromBundleToSearchView?.let {
-            viewModel.searchNotes(textFromBundleToSearchView.toString())
-        }
-        super.onStart()
-    }
-
-    override fun onResume() {
-        Log.d("SearchActivity", "onResume")
-        super.onResume()
-    }
-
-    override fun onPause() {
-        Log.d("SearchActivity", "onPause")
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.d("SearchActivity", "onStop")
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Log.d("SearchActivity", "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onRestart() {
-//        textFromBundleToSearchView?.let {
-//            viewModel.searchNotes(textFromBundleToSearchView.toString())
-//        }
-
-        super.onRestart()
     }
 
     private fun setColorStatusBar() {
@@ -213,4 +161,11 @@ class SearchNoteItemActivity : AppCompatActivity() {
         window.statusBarColor = this.resources.getColor(R.color.black, theme.resources.newTheme())
     }
 
+
+    override fun onStart() {
+        textFromBundleToSearchView?.let {
+            viewModel.searchNotes(textFromBundleToSearchView.toString())
+        }
+        super.onStart()
+    }
 }

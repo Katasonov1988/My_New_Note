@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/noteCardViewNoteLayoutMargin"
-    app:cardElevation="@dimen/noteCardViewNoteElevation"
     app:cardBackgroundColor="@color/noteCardBackgroundColor"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/noteCardViewNoteCardCornerRadius">
+    app:cardCornerRadius="@dimen/noteCardViewNoteCardCornerRadius"
+    app:cardElevation="@dimen/noteCardViewNoteElevation"
+    app:cardUseCompatPadding="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -27,9 +27,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text = "Сходить в магазин"
-
-            />
+            tools:text="Сходить в магазин" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -42,8 +40,7 @@
             android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvHeader"
-            tools:text = "Молоко, хлеб, какао, пряники, пиво"
-            />
+            tools:text="Молоко, хлеб, какао, пряники, пиво" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -53,7 +50,7 @@
             android:layout_marginTop="@dimen/tvDateMarginTop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            tools:text="23:23:12"/>
+            tools:text="23:23:12" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

@@ -10,32 +10,23 @@ import com.example.mynewnote.domain.NoteItem
 import com.example.mynewnote.domain.SearchNoteItemUseCase
 import kotlinx.coroutines.launch
 
-class SearchViewModel(application: Application): AndroidViewModel(application) {
+class SearchViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = NoteListRepositoryImpl(application)
 
     private val searchNoteItemUseCase = SearchNoteItemUseCase(repository)
-
-//fun searchNotes (newText: String): List<NoteItem> {
-//    val searchedItems = searchNoteItemUseCase.searchNoteList(newText)
-//return searchedItems.
-//
-//}
     private var _ldListNotes = MutableLiveData<List<NoteItem>>()
+
     val ldListNotes: LiveData<List<NoteItem>>
-    get() = _ldListNotes
+        get() = _ldListNotes
 
-
-
-    fun searchNotes (newText: String) {
-            viewModelScope.launch {
-                val listItem = searchNoteItemUseCase.searchNoteList(newText)
-                _ldListNotes.value = listItem
-            }
-
+    fun searchNotes(newText: String) {
+        viewModelScope.launch {
+            val listItem = searchNoteItemUseCase.searchNoteList(newText)
+            _ldListNotes.value = listItem
         }
-
-    fun setZeroValueToList () {
-        _ldListNotes.value = listOf<NoteItem>()
     }
 
+    fun setZeroValueToList() {
+        _ldListNotes.value = listOf<NoteItem>()
+    }
 }

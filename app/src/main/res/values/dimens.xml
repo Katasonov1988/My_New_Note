@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="activityNoteTvLastUpdateMargin">16dp</dimen>
+    <dimen name="activityNoteTextInputLayoutmargin">16dp</dimen>
+    <dimen name="activityNoteTvLastUpdatePadding">0dp</dimen>
+    <dimen name="activityNoteTextInputEditTextPaddingEnd">0dp</dimen>
+    <dimen name="activityNoteTextInputEditTextPaddingStart">0dp</dimen>
+    <dimen name="activityNoteViewMarginStart">16dp</dimen>
+    <dimen name="activityNoteViewMarginEnd">16dp</dimen>
+    <dimen name="activityNoteViewMarginTop">16dp</dimen>
+    <dimen name="activityNoteTextFieldMarginStart">16dp</dimen>
+    <dimen name="activityNoteTextFieldMarginEnd">16dp</dimen>
+    <dimen name="activityNoteTextFieldMarginTop">0dp</dimen>
+    <dimen name="activityNoteTextFieldPaddingEnd">0dp</dimen>
+    <dimen name="activityNoteTextFieldPaddingStart">0dp</dimen>
     <dimen name="noteLinearLayoutCompatLayoutMargin">12dp</dimen>
     <dimen name="noteCardViewNoteElevation">1dp</dimen>
     <dimen name="noteCardViewNoteLayoutMargin">4dp</dimen>

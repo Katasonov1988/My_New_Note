@@ -30,6 +30,7 @@
 
     <style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@android:color/darker_gray</item>
+        <item name="android:textColorHint">@color/editNoteTextColorHint</item>
     </style>
 
 
