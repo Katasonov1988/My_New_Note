@@ -1,4 +1,4 @@
-package com.example.mynewnote.presentation.firsts_creen
+package com.example.mynewnote.presentation.first_screen
 
 import android.app.Application
 import androidx.lifecycle.*

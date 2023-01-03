@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mynewnote.R
 import com.example.mynewnote.databinding.ActivityNoteItemBinding
 import com.example.mynewnote.presentation.DeleteDialogFragment
-import com.example.mynewnote.presentation.firsts_creen.MainActivity
+import com.example.mynewnote.presentation.first_screen.MainActivity
 import java.lang.RuntimeException
 
 class NoteItemActivity : AppCompatActivity(),
